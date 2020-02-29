@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>第一篇文章</title>
+    <url>/2020/02/29/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>无用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HelloWorld</title>
+    <url>/2020/02/28/HelloWorld/</url>
+    <content><![CDATA[<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	<link rel="alternate" href="/atom.xml" title="CodeDebug-Moon" type="application/atom+xml">
+</head>
+	<body>
+		
+		<h1>Hello World</h1>
+	</body>
+</html>
+]]></content>
+  </entry>
+</search>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"codedebug-moon.top","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"url":null,"rounded":false,"rotated":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用汇编语言在DOS中显示自己的名字。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编语言">
+<meta property="og:url" content="https://codedebug-moon.top/2020/03/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="CodeDebug-Moon">
+<meta property="og:description" content="使用汇编语言在DOS中显示自己的名字。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-01T12:31:53.000Z">
+<meta property="article:modified_time" content="2020-03-01T12:37:54.127Z">
+<meta property="article:author" content="CodeDebug-Moon">
+<meta property="article:tag" content="汇编语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://codedebug-moon.top/2020/03/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>汇编语言 | CodeDebug-Moon</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="CodeDebug-Moon" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CodeDebug-Moon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://codedebug-moon.top/2020/03/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodeDebug-Moon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CodeDebug-Moon">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          汇编语言
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-01 20:31:53 / Modified: 20:37:54" itemprop="dateCreated datePublished" datetime="2020-03-01T20:31:53+08:00">2020-03-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="post-meta-item leancloud_visitors" data-flag-title="汇编语言" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/03/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/01/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>使用汇编语言在DOS中显示自己的名字。</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>Source code:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br></pre></td><td class="code"><pre><span class="line">data segment </span><br><span class="line">car db 255;定义字符图形表</span><br><span class="line">db 05h,122,0,0;李的横</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line"></span><br><span class="line">db 05h,122,-2,-6;shu</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db 05h,122,0,-7;zuopie</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,-1,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,-1,1</span><br><span class="line">db 05h,122,-1,1</span><br><span class="line"></span><br><span class="line">db 05h,122,0,4;youpie</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line"></span><br><span class="line">db 05h,122,1,-10;zide le</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,-1,-1</span><br><span class="line"></span><br><span class="line">db 05h,122,-3,-4;zideheng</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line"></span><br><span class="line">db 05h,122,-9,6;jiandezouzhi</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,-6,0</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,1,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,-15,-6;jiandeshu</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,-13,-2</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line"></span><br><span class="line">db 05h,122,-2,-1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line"></span><br><span class="line">db 05h,122,4,-8</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line"></span><br><span class="line">db 05h,122,3,-7</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line"></span><br><span class="line">db 05h,122,-10,5;pengdeyue</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line"></span><br><span class="line">db 05h,122,-14,2</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,-8,-1</span><br><span class="line">db 05h,122,4,0</span><br><span class="line"></span><br><span class="line">db 05h,122,-9,3</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line"></span><br><span class="line">db 05h,122,-14,2</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,0,-1</span><br><span class="line">db 05h,122,-9,0</span><br><span class="line">db 05h,122,4,0</span><br><span class="line"></span><br><span class="line">db 05h,122,-9,5</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,-1,-1</span><br><span class="line"></span><br><span class="line">db 05h,122,-2,0</span><br><span class="line"></span><br><span class="line">db 05h,122,-1,-2</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,0,1</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,0</span><br><span class="line">db 05h,122,1,-1</span><br><span class="line">db 05h,122,-1,-1</span><br><span class="line"></span><br><span class="line">db 05h,122,-2,-1</span><br><span class="line"></span><br><span class="line">char_cnt dw ? </span><br><span class="line">pointer dw ? </span><br><span class="line">line_on db ? </span><br><span class="line">col_on db ? </span><br><span class="line">data ends </span><br><span class="line">stack segment </span><br><span class="line">db 2000 dup (0) </span><br><span class="line">stack ends </span><br><span class="line">code segment </span><br><span class="line">assume cs:code,ds:data </span><br><span class="line">main proc far </span><br><span class="line">push ds </span><br><span class="line">sub ax,ax </span><br><span class="line">push ax </span><br><span class="line">mov ax,data ;初始化 DS </span><br><span class="line">mov ds,ax </span><br><span class="line">mov ah,0 ;设置 300*200 彩色图形方式</span><br><span class="line">mov al,3 </span><br><span class="line">int 10h </span><br><span class="line">mov ah,0bh ;设置背景颜色</span><br><span class="line">mov bh,0 </span><br><span class="line">mov bl,2 </span><br><span class="line">int 10h </span><br><span class="line">mov ah,0bh ;设置彩色调板</span><br><span class="line">mov bh,01 </span><br><span class="line">mov bl,00 </span><br><span class="line">int 10h </span><br><span class="line">call clear_screen ;清屏</span><br><span class="line">lea di,car ;di 指向字符图形表</span><br><span class="line">mov dh,5 ;从第 5 行第 5 列位置开始</span><br><span class="line">mov dl,5 ;显示汽车</span><br><span class="line">call move_shape </span><br><span class="line">mov ah,01h ;从键盘输入字符</span><br><span class="line">int 21h </span><br><span class="line">cmp al,0dh </span><br><span class="line">je exit </span><br><span class="line">exit:mov ah,4ch </span><br><span class="line">int 21h </span><br><span class="line">ret </span><br><span class="line">main endp </span><br><span class="line">clear_screen proc near ;清屏子程序</span><br><span class="line">push ax ;保护寄存器</span><br><span class="line">push bx </span><br><span class="line">push cx </span><br><span class="line">push dx </span><br><span class="line">mov ah,6 ;屏幕上卷功能</span><br><span class="line">mov al,6 </span><br><span class="line">mov ch,0 ;左上角行号</span><br><span class="line">mov cl,0 ;左上角列号</span><br><span class="line">mov dh,250 ;右下角行号</span><br><span class="line">mov dl,250 ;右下角列号</span><br><span class="line">mov bh,7 ;卷入行属性</span><br><span class="line">int 10h ;调用显示功能</span><br><span class="line">pop dx ;恢复寄存器</span><br><span class="line">pop cx </span><br><span class="line">pop bx </span><br><span class="line">pop ax </span><br><span class="line">ret ;返回主程序</span><br><span class="line">clear_screen endp </span><br><span class="line">move_shape proc near </span><br><span class="line">push ax </span><br><span class="line">push bx </span><br><span class="line">push cx </span><br><span class="line">push dx </span><br><span class="line">push di </span><br><span class="line">mov ah,0fh ;取当前显示方式</span><br><span class="line">int 10h </span><br><span class="line">sub ch,ch ;清除寄存器 CX 的高字节</span><br><span class="line">mov cl,[di] ;CL 放循环次数</span><br><span class="line">inc di ;di 指向字符表的第一个字符</span><br><span class="line">mov char_cnt,cx ;保存循环次数</span><br><span class="line">mov pointer,di </span><br><span class="line">mov line_on,dh </span><br><span class="line">mov col_on,dl </span><br><span class="line">plot_next: </span><br><span class="line">add dh,[di+2] ;改变行列指针</span><br><span class="line">add dl,[di+3] </span><br><span class="line">cmp dl,150 ;出屏否？</span><br><span class="line">jb mov_crsr </span><br><span class="line">call erase </span><br><span class="line">pop di </span><br><span class="line">pop dx </span><br><span class="line">pop cx </span><br><span class="line">pop bx </span><br><span class="line">pop ax </span><br><span class="line">ret </span><br><span class="line">mov_crsr: </span><br><span class="line">mov ah,2 ;移动光标位置</span><br><span class="line">int 10h </span><br><span class="line">mov al,[di] </span><br><span class="line">mov bl,[di+1] ;取字符值及属性</span><br><span class="line">push cx </span><br><span class="line">mov cx,1 </span><br><span class="line">mov ah,09 ;显示字符</span><br><span class="line">int 10h </span><br><span class="line">pop cx </span><br><span class="line">add di,4 ;di 指向下一个字符</span><br><span class="line">loop plot_next </span><br><span class="line">call dly_qrtr ;调用延时子程序</span><br><span class="line">call erase ;调用擦除子程序</span><br><span class="line">jmp short plot_next </span><br><span class="line">move_shape endp </span><br><span class="line">erase proc near ;擦除子程序</span><br><span class="line">mov cx,char_cnt </span><br><span class="line">mov di,pointer </span><br><span class="line">mov dh,line_on </span><br><span class="line">mov dl,col_on </span><br><span class="line">erase_next: </span><br><span class="line">add dh,[di+2] </span><br><span class="line">add dl,[di+3] </span><br><span class="line">mov ah,2 </span><br><span class="line">int 10h </span><br><span class="line">mov al,[di] </span><br><span class="line">mov bl,0 </span><br><span class="line">push cx </span><br><span class="line">mov cx,1 </span><br><span class="line">mov ah,9 </span><br><span class="line">int 10h </span><br><span class="line">pop cx </span><br><span class="line">add di,4 </span><br><span class="line">loop erase_next </span><br><span class="line">mov cx,char_cnt </span><br><span class="line">mov di,pointer </span><br><span class="line">mov dh,line_on </span><br><span class="line">inc col_on </span><br><span class="line">mov dl,col_on </span><br><span class="line">ret </span><br><span class="line">erase endp </span><br><span class="line">dly_qrtr proc near ;延时子程序</span><br><span class="line">push cx </span><br><span class="line">push dx </span><br><span class="line">mov dx,50000 </span><br><span class="line">d11:mov cx,8000 </span><br><span class="line">d12:loop d12 </span><br><span class="line">dec dx </span><br><span class="line">jnz d11 </span><br><span class="line">pop dx </span><br><span class="line">pop cx </span><br><span class="line">ret </span><br><span class="line">dly_qrtr endp </span><br><span class="line">code ends </span><br><span class="line">end main</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tag"></i> 汇编语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/01/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8/" rel="prev" title="语法分析器-算符优先">
+      <i class="fa fa-chevron-left"></i> 语法分析器-算符优先
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/01/%E5%B0%8F%E5%BF%83%E5%BF%83%E8%A1%A8%E7%99%BD/" rel="next" title="小心心表白">
+      小心心表白 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CodeDebug-Moon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CodeDebug-Moon/CodeDebug-Moon.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CodeDebug-Moon&#x2F;CodeDebug-Moon.github.io" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:532343081@qq.com" title="E-Mail → mailto:532343081@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/1824271411" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;1824271411" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">Baidu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/?mkt=zh-CN#" title="https:&#x2F;&#x2F;cn.bing.com&#x2F;?mkt&#x3D;zh-CN#" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.cn/" title="https:&#x2F;&#x2F;www.google.cn" rel="noopener" target="_blank">Google</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CodeDebug-Moon</span>
+</div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=1GnUuI2WbijHWIDsL6QkAA5D-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : '1GnUuI2WbijHWIDsL6QkAA5D-gzGzoHsz',
+            'X-LC-Key'    : 'grIPcQaD3SKNwAWNEla0mqm7',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '1GnUuI2WbijHWIDsL6QkAA5D-gzGzoHsz',
+      appKey     : 'grIPcQaD3SKNwAWNEla0mqm7',
+      placeholder: "请在此处输入您的留言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
